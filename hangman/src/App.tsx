@@ -1,7 +1,10 @@
 import { useState } from "react";
 import words from "./wordList.json";
+import { HangmanDrawing } from "./HangmanDrawing";
+import { HangmanWord } from "./HangmanWord";
+import { Keyboard } from "./Keyboard";
 
-// https://youtu.be/-ONUyenGnWw?t=449  en son kaldigim dakika
+// https://youtu.be/-ONUyenGnWw?t=991  en son kaldigim dakika
 
 function App() {
   const [wordToGuess, setWordToGuess] = useState(() => {
@@ -21,20 +24,21 @@ function App() {
         gap: "2rem",
         margin: "0 auto",
         alignItems: "center",
-      }}>
-
-<div style={{
-  fontSize : "2rem", textAlign: "center",
-}}>
-  Lose 
-  Win
-</div>
-
-<HangmanDrawing/>
-<HangmanWord/>
-<Keyboard/>
-
+      }}
+    >
+      <div
+        style={{
+          fontSize: "2rem",
+          textAlign: "center",
+        }}
+      >
+        Lose Win
       </div>
+
+      <HangmanDrawing />
+      <HangmanWord />
+      <Keyboard />
+    </div>
   );
 }
 
