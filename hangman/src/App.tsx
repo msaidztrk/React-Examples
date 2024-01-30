@@ -4,7 +4,7 @@ import { HangmanDrawing } from "./HangmanDrawing";
 import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 
-// https://youtu.be/-ONUyenGnWw?t=991  en son kaldigim dakika
+// https://youtu.be/-ONUyenGnWw?t=1404  en son kaldigim dakika
 
 function App() {
   const [wordToGuess, setWordToGuess] = useState(() => {
@@ -37,7 +37,11 @@ function App() {
 
       <HangmanDrawing />
       <HangmanWord />
-      <Keyboard />
+
+      <div style={{ alignSelf: "stretch" }}>
+        <Keyboard />
+      </div>
+
     </div>
   );
 }
