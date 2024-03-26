@@ -34,42 +34,48 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
 
-    const navigate = useNavigate();
-    
-    const [email, setEmail] = useState('');
+  localStorage.removeItem('validation');
+  localStorage.removeItem('array');
 
-    const handleEmail = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setEmail(event.target.value);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+
+  const handleEmail = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEmail(event.target.value);
+  };
+
+  const [password, setPassword] = useState('');
+  const handlePassword = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    setPassword(event.target.value);
+  };
+
+  function send_login_request() {
+    console.log(email, password);
+
+    const formData = {
+      token: 'RasyoIoToken2021',
+      EmAil: email,
+      password: password
     };
 
-    const [password, setPassword] = useState('');
-    const handlePassword = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setPassword(event.target.value);
-    };
 
-    function send_login_request() {
-        console.log(email, password);
+    axios.post('https://duyu.alter.net.tr/api/getTokenAndModulesOfUser', formData)
+      .then(response => {
+        console.log(response.data);
 
-        const formData = {
-            token: 'RasyoIoToken2021',
-            EmAil: email,
-            password: password
-        };
+        if (response.status == 200) {
+          localStorage.setItem('validation', 'true');
+          localStorage.setItem('array', JSON.stringify(response.data));
+          navigate("/home");
+        }
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
 
-        axios.post('https://duyu.alter.net.tr/api/getTokenAndModulesOfUser', formData)
-            .then(response => {
-                console.log(response.data);
-
-                if (response.status == 200)
-                    navigate("/home");
-
-            })
-            .catch(error => {
-                console.log(error);
-            });
- 
-            
   };
 
   return (
@@ -106,7 +112,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate  sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
