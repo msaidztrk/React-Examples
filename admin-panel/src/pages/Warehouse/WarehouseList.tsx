@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Skeleton from '@mui/material/Skeleton'; 
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -29,6 +30,7 @@ const MySwal = withReactContent(Swal)
 const GetlistPaging = ({ storageArray }: any) => {
 
     const [isloaded, setLoaded] = useState(false)
+    const [isAxiosEnded, setisAxiosEnded] = useState(false)
     const [responseData, setResponseData] = useState<any[]>([]);
 
     useEffect(() => {
@@ -42,6 +44,7 @@ const GetlistPaging = ({ storageArray }: any) => {
                     console.log(response.data);
                     if (response.status === 200) {
                         setResponseData(response.data[0]);
+                        setisAxiosEnded(true)
                     }
                 })
                 .catch(error => {
@@ -58,28 +61,34 @@ const GetlistPaging = ({ storageArray }: any) => {
 
 
     return (
-
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <> 
+        
+          {isAxiosEnded ? (
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
-                    <TableRow>
-                        <TableCell align="center">Modül</TableCell>
-                        <TableCell align="center">Değer</TableCell>
-                    </TableRow>
+                  <TableRow>
+                    <TableCell align="center">Modül</TableCell>
+                    <TableCell align="center">Değer</TableCell>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
-
-
-                    {responseData.map((row, index) => (
-                        <TableRow key={index}>
-                            <TableCell align="center">{row.Field}</TableCell>{/* Adjust property name */}
-                            <TableCell align="center">{row.Field}</TableCell>{/* Adjust property name */}
-                        </TableRow>
-                    ))}
+                  {/* Assuming responseData is an array of objects */}
+                  {responseData.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell align="center">{row.Field}</TableCell>
+                      <TableCell align="center">{row.Value}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
-            </Table>
-        </TableContainer>
-    )
+              </Table>
+            </TableContainer>
+          ) : (
+            <Skeleton variant="rectangular" width={'100%'} height={'100vh'} />
+          )}
+        </>
+      );
+      
 }
 
 export default GetlistPaging

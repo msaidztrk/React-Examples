@@ -48,6 +48,7 @@ function AppRoutes() {
     if (isLoginRoute === false && storage_val == null) {
       navigate("/login");
     }
+
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
 
@@ -62,6 +63,7 @@ function AppRoutes() {
       <Route path="*" element={<Signin />} />
     </Routes>
   );
+  
 }
  
 

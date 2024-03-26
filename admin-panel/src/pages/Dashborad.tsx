@@ -144,6 +144,9 @@ export default function Dashboard({ storageArray }: any) {
               {pathname === '/' ? 'Home' : pathname.slice(1).replace(/-/g, ' ')}
               
             </Typography>
+
+
+
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
