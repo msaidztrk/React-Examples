@@ -10,44 +10,56 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-export const mainListItems = (
-  <React.Fragment>
 
-    <ListItemButton component={Link} to="/home">
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
+export const mainListItems = () => {
+  const [userStatus, setUserStatus] = React.useState('0');
 
-    <ListItemButton  component={Link} to="/permissions">
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Permissions" />
-    </ListItemButton>
+  // Access local storage and set user status
+  React.useEffect(() => {
+    let stor_arr: string = localStorage.getItem('array') as string;
+    let userObj: { status: string } = JSON.parse(stor_arr) as { status: string };
+    console.log("sidebar local : ", userObj);
+    setUserStatus(userObj.status)
+  }, []); // Empty dependency array to run effect only once
 
-    <ListItemButton component={Link} to="/warehouse-list">
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Warehouse Listesi" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
+  return (
+    <React.Fragment>
+      <ListItemButton component={Link} to="/home">
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+
+      <ListItemButton component={Link} to="/permissions">
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Permissions" />
+      </ListItemButton>
+
+      <ListItemButton component={Link} to="/warehouse-list">
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Warehouse Listesi" />
+      </ListItemButton> 
+
+
+      {userStatus == '1' ?  
+      <ListItemButton component={Link} to="/kullanici-ekle">
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Kullanıcı Ekle" />
+      </ListItemButton>  : ''}
+
+      {/* Rest of your list items */}
+    </React.Fragment>
+  );
+};
 
 export const secondaryListItems = (
   <React.Fragment>

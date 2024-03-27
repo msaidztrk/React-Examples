@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashborad";
 import MainPage from "./MainPage";
 import Permissions from "./pages/Permissions/Permissions";
 import Warehouse from "./pages/Warehouse/WarehouseList";
+import AddOrUpdateUser from "./pages/AddAndUpdate/User";
 
 import * as React from 'react';
 
@@ -34,6 +35,8 @@ function AppRoutes() {
 
   const [storageVal, setStorageVal] = React.useState(localStorage.getItem('validation'));
   const [storageArray, setStorageArray] = React.useState(localStorage.getItem('array'));
+  const [userStatus, setUserStatus] = React.useState<string | null>(''); // Store user status
+
 
   useEffect(() => { 
 
@@ -47,7 +50,15 @@ function AppRoutes() {
 
     if (isLoginRoute === false && storage_val == null) {
       navigate("/login");
+    } 
+    
+    if(storage_val != null){
+      let userObj: { status: string } = JSON.parse(storage_array) as { status: string };
+      setUserStatus(userObj.status);
     }
+   
+
+
 
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
@@ -59,6 +70,11 @@ function AppRoutes() {
         <Route path="home" element={<MainPage />} />
         <Route path="permissions" element={<Permissions storageArray={storageArray} />} />
         <Route path="warehouse-list" element={<Warehouse storageArray={storageArray} />} />
+
+      {userStatus == '1' && (
+        <Route path="kullanici-ekle" element={<AddOrUpdateUser storageArray={storageArray} />} />
+      )}
+
       </Route> 
       <Route path="*" element={<Signin />} />
     </Routes>

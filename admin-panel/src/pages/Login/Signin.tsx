@@ -7,6 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -15,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import Stack from '@mui/material/Stack';
 
 function Copyright(props: any) {
   return (
@@ -40,6 +42,8 @@ export default function SignInSide() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
+  const [loginError, setLoginError] = useState(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState('');
 
   const handleEmail = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setEmail(event.target.value);
@@ -54,25 +58,33 @@ export default function SignInSide() {
     console.log(email, password);
 
     const formData = {
-      token: 'RasyoIoToken2021',
+      token: 'Test-deneme',
       EmAil: email,
       password: password
     };
 
+    let duyu_url = 'https://duyu.alter.net.tr'
+    let local_url = 'http://127.0.0.1:8000/api/login'
 
-    axios.post('https://duyu.alter.net.tr/api/getTokenAndModulesOfUser', formData)
+    axios.post(local_url, formData)
       .then(response => {
-        console.log(response.data);
+        console.log('response : ', response.data);
 
         if (response.status == 200) {
           localStorage.setItem('validation', 'true');
           localStorage.setItem('array', JSON.stringify(response.data));
+          setLoginError(false)
           navigate("/home");
+        } else {
+          setLoginError(true)
+          setLoginErrorMsg(response.data)
         }
 
       })
       .catch(error => {
         console.log(error);
+        setLoginError(true)
+        setLoginErrorMsg(error.response.data)
       });
 
 
@@ -112,6 +124,11 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              {loginError == true ? <Alert variant="filled" severity="error">
+                {loginErrorMsg}
+              </Alert> : ''}
+            </Stack>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"

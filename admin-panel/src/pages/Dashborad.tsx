@@ -109,17 +109,14 @@ export default function Dashboard({ storageArray }: any) {
     if (parsedBase64) {
       setImageSrc(parsedBase64);
     }
-  }, [userObj.mobile_logo_base64]);
+  }, [userObj?.mobile_logo_base64]);
 
   const location = useLocation();
   const pathname = location.pathname; 
 
-  const [auth, setAuth] = React.useState(true);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -219,7 +216,7 @@ export default function Dashboard({ storageArray }: any) {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {mainListItems()}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
           </List>
