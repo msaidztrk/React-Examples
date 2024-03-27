@@ -103,9 +103,8 @@ export default function Dashboard({ storageArray }: any) {
 
   React.useEffect(() => {
 
-    console.log("Logo Triggered");
+    const parsedBase64 = userObj?.mobile_logo_base64;
 
-    const parsedBase64 = userObj.mobile_logo_base64;
     if (parsedBase64) {
       setImageSrc(parsedBase64);
     }
@@ -235,11 +234,8 @@ export default function Dashboard({ storageArray }: any) {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <Outlet />
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-
-                </Paper>
+              <Outlet />
               </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />

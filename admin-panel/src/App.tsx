@@ -49,15 +49,14 @@ function AppRoutes() {
     const isLoginRoute = location.pathname === '/login';
 
     if (isLoginRoute === false && storage_val == null) {
-      navigate("/login");
+  navigate("/login");
     } 
     
     if(storage_val != null){
       let userObj: { status: string } = JSON.parse(storage_array) as { status: string };
       setUserStatus(userObj.status);
     }
-   
-
+  
 
 
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
@@ -76,7 +75,7 @@ function AppRoutes() {
       )}
 
       </Route> 
-      <Route path="*" element={<Signin />} />
+      <Route path="*" element={<MainPage />} />
     </Routes>
   );
   
