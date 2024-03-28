@@ -63,7 +63,7 @@ export default function SignInSide() {
       password: password
     };
 
-    let duyu_url = 'https://duyu.alter.net.tr'
+
     let local_url = 'http://127.0.0.1:8000/api/login'
 
     axios.post(local_url, formData)
