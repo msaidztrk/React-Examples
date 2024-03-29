@@ -11,7 +11,13 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
+import Collapse from '@mui/material/Collapse';
+import List from '@mui/material/List';
+import StarBorder from '@mui/icons-material/StarBorder'; 
+import InboxIcon from '@mui/icons-material/MoveToInbox'; 
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore'; 
+import BallotIcon from '@mui/icons-material/Ballot'; 
 
 export const mainListItems = () => {
   const [userStatus, setUserStatus] = React.useState('0');
@@ -22,7 +28,13 @@ export const mainListItems = () => {
     let userObj: { status: string } = JSON.parse(stor_arr) as { status: string };
     console.log("sidebar local : ", userObj);
     setUserStatus(userObj.status)
-  }, []); // Empty dependency array to run effect only once
+  }, []); // Empty dependency array to run effect only once 
+
+  const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   return (
     <React.Fragment>
@@ -45,16 +57,42 @@ export const mainListItems = () => {
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Warehouse Listesi" />
-      </ListItemButton> 
+      </ListItemButton>
 
 
-      {userStatus == '1' ?  
-      <ListItemButton component={Link} to="/kullanici-ekle">
+      {userStatus == '1' ?
+
+        <>      
+        <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <PeopleIcon />
+          <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Kullanıcı Ekle" />
-      </ListItemButton>  : ''}
+        <ListItemText primary="Inbox" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+        <ListItemButton component={Link} to="/kullanici-ekle" sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Kullanıcı Ekle" />
+          </ListItemButton>  
+
+          <ListItemButton  component={Link} to="/kullanici-goruntule" sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <BallotIcon />
+            </ListItemIcon>
+            <ListItemText primary="Kullanıcı Görüntüle" />
+          </ListItemButton> 
+
+       
+
+
+        </List>
+      </Collapse></>
+        : ''}
 
       {/* Rest of your list items */}
     </React.Fragment>

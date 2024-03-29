@@ -11,13 +11,14 @@ import Dashboard from "./pages/Dashborad";
 import MainPage from "./MainPage";
 import Permissions from "./pages/Permissions/Permissions";
 import Warehouse from "./pages/Warehouse/WarehouseList";
-import AddOrUpdateUser from "./pages/AddAndUpdate/User";
+import AddOrUpdateUser from "./pages/AddAndUpdate/UserAddOrUpdate";
+import UserList from "./pages/List/UserList";
 
 import * as React from 'react';
 
 import { useEffect, useMemo } from "react";
 
-
+// npm run dev for start
 
 
 function App() {
@@ -45,9 +46,18 @@ function AppRoutes() {
   if(storage_val != null){
     let userObj: { status: string } = JSON.parse(storage_array) as { status: string };
     userStatus = userObj.status;
-  }
+  } 
 
-  console.log("userStatus : ",userStatus);
+
+  const authObject = useMemo(() => {
+    if (!storageArray) return []; // Return empty array if storage_array is empty
+    try {
+      return JSON.parse(storageArray);
+    } catch (error) {
+      console.error('Error parsing storage_array:', error);
+      return null;  // Or return a placeholder value
+    }
+  }, [storageArray]);
 
 
   return (
@@ -61,8 +71,14 @@ function AppRoutes() {
             <Route path="home" element={<MainPage />} />
             <Route path="permissions" element={<Permissions storageArray={storageArray} />} />
             <Route path="warehouse-list" element={<Warehouse storageArray={storageArray} />} />
-            {userStatus === '1' && (
-              <Route path="kullanici-ekle" element={<AddOrUpdateUser storageArray={storageArray} />} />
+            {userStatus === '1' && ( 
+          <>
+          <Route path="kullanici-ekle" element={<AddOrUpdateUser storageArray={storageArray} />} /> 
+          <Route path="kullanici-goruntule" element={<UserList authObject={authObject} />} /> 
+          </>
+              
+          
+      
             )}
           </Route>
           <Route path="*" element={<MainPage />} />

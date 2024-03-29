@@ -36,6 +36,7 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
     const [name, setName] = useState<string>('');
     const [status, setStatus] = useState<string>('');
     const [updatingUser, setUpdatingUser] = useState<string>('0');
+    const [isUpdatingUserExist, setiIUpdatingUserExist] = useState<boolean>(false);
 
     const local_url = 'http://127.0.0.1:8000/api';
 
@@ -45,6 +46,7 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
             const user_id: string | null = queryParameters.get("i");
 
             if (user_id !== null) {
+                console.log("updating id : ",user_id);
                 setUpdatingUser(user_id);
                 const formData = {
                     token: 'Test-deneme',
@@ -55,10 +57,12 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
                 try {
                     const [msg, data] = await post_axios('/get-user-info', formData);
                     if (msg === 'success') {
+                        setiIUpdatingUserExist(true)
                         setEmail(data.data.email)
                         setPassword(data.data.password_text);
                         setName(data.data.name);
                         setStatus(data.data.status);
+
                     }
                 } catch (error) {
                     navigate(-1)
@@ -95,18 +99,19 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
         try {
             let url = '';
             if (updatingUser == '0')
-                 url = '/create-user';
+                url = '/create-user';
             else {
-                 url = '/update-user';
+                url = '/update-user';
             }
             const [msg, data] = await post_axios(url, formData);
             if (msg === 'success') {
-                MySwal.fire(<p>Kullanıcı Oluşturuldu</p>);
+                navigate('/kullanici-goruntule')
             }
-        } catch (error : any) {
+        } catch (error: any) {
             // Handle error
-            if(error?.response?.data == 'User Already Exist')
+            if (error?.response?.data == 'User Already Exist')
                 MySwal.fire(<p>İşlem Başarısız</p>);
+
             console.error('Error !!:', error);
         }
 
@@ -122,9 +127,6 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
             console.log('response:', response);
             return ['success', response];
         } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                MySwal.fire(<p>{error.response?.data}</p>);
-            }
             throw error; // Re-throw the error for the calling function to handle
         }
     }
@@ -134,7 +136,7 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
     return (
         <>
 
-            <Box
+            {updatingUser == '0' || isUpdatingUserExist ? <Box
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '100%' },
@@ -213,7 +215,8 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
 
 
                 </div>
-            </Box>
+            </Box> : ''}
+
 
         </>
     );

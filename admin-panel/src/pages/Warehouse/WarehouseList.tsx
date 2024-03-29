@@ -37,9 +37,9 @@ const GetlistPaging = ({ storageArray }: any) => {
 
         if (!isloaded) {
             let userObj = JSON.parse(storageArray) as { token: string };
-            let form_data = createForm("RasyoIoToken2021", userObj!.token, 1, 20, "CurrentCode", "DESC");
+            let form_data = createForm("Test-deneme", userObj!.token, 1, 20, "CurrentCode", "DESC");
 
-            axios.post('https://duyu.alter.net.tr/api/DUYUII/CustomerBalance/GetlistPaging', form_data)
+            axios.post('http://127.0.0.1:8000/api/DUYUII/CustomerBalance/GetlistPaging', form_data)
                 .then(response => {
                     console.log(response.data);
                     if (response.status === 200) {
