@@ -100,12 +100,12 @@ export default function BasicTable({ authObject }: any) {
 
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
+                <TableHead style={{ backgroundColor: 'black' }}>
                     <TableRow>
-                        <TableCell align="center">Mail</TableCell>
-                        <TableCell align="center">İsim</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">İşlemler</TableCell>
+                        <TableCell align="center" style={{ color: 'white' }}>Mail</TableCell>
+                        <TableCell align="center" style={{ color: 'white' }}>İsim</TableCell>
+                        <TableCell align="center" style={{ color: 'white' }}>Status</TableCell>
+                        <TableCell align="center" style={{ color: 'white' }}>İşlemler</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

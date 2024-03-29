@@ -151,7 +151,7 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
                             <Grid container spacing={2} style={{ border: '1px solid black', borderRadius: 10, paddingTop: 10, display: 'flex', justifyContent: 'center', }} >
 
                                 <Typography variant="h3" gutterBottom>
-                                    Kullanıcı Ekle
+                                {isUpdatingUserExist ? 'Kullanıcı Güncelle' : "Kullanıcı Oluştur"}
                                 </Typography>
 
                             </Grid>
@@ -205,15 +205,12 @@ const AddOrUpdateUser = ({ storageArray }: any) => {
                                 </Grid>
                             </Grid>
 
-                            <Button variant="contained" onClick={submitForm}>Ekle</Button>
 
-
-
-
+                            <Button variant="contained" onClick={submitForm}>
+                                {isUpdatingUserExist ? 'Güncelle' : "Oluştur"}
+                            </Button>
                         </CardContent>
                     </Card>
-
-
                 </div>
             </Box> : ''}
 

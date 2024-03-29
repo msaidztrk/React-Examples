@@ -17,6 +17,9 @@ class ApiController extends Controller
         if ($msg != 'ok')
             return response()->json($msg, $status);
 
+        if($request['auth'] ==  $request['delete_id'])
+            return response()->json("", 404);
+
         $auth_info = User::select()->where('id', $request['auth'])->first();
         $check_user = User::where('id', $request['delete_id'])->first();
 
@@ -41,7 +44,7 @@ class ApiController extends Controller
         if ($msg != 'ok')
             return response()->json($msg, $status);
 
-        $all_kind_of_users = User::select()->get();
+        $all_kind_of_users = User::select()->whereNot('id',$request['auth'] )->get();
         return $all_kind_of_users;
 
     }
