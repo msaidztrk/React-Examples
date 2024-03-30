@@ -18,6 +18,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
 
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -35,6 +36,9 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+
+  window.history.replaceState(null, "Giriş Yap", "/login")
+  
 
   localStorage.removeItem('validation');
   localStorage.removeItem('array');

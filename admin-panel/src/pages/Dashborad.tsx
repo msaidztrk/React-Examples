@@ -19,7 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from "../listItems";
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
 import { Menu, MenuItem } from '@mui/material';
@@ -90,7 +90,8 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Dashboard({ storageArray }: any) {
+export default function Dashboard({ storageArray }: any) { 
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -123,6 +124,11 @@ export default function Dashboard({ storageArray }: any) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+
+  const logout = () => {
+    navigate('login')
   };
 
   return (
@@ -185,7 +191,7 @@ export default function Dashboard({ storageArray }: any) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={logout}>Çıkış</MenuItem>
               </Menu>
             </div>
 

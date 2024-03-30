@@ -67,7 +67,7 @@ export const mainListItems = () => {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="Kullanıcılar" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
