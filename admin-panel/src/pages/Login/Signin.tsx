@@ -19,6 +19,9 @@ import axios from 'axios';
 import Stack from '@mui/material/Stack';
 
 
+import AuthContext from '../../context/AuthProvider';
+
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -38,7 +41,9 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
 
   window.history.replaceState(null, "Giriş Yap", "/login")
-  
+
+
+  const { setAuth }: any = React.useContext(AuthContext);
 
   localStorage.removeItem('validation');
   localStorage.removeItem('array');
