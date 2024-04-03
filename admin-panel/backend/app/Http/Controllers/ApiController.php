@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use UAParser\Parser;
 
 
 class ApiController extends Controller
@@ -74,6 +76,17 @@ class ApiController extends Controller
 
     }
 
+    public function create_login_token($user_id , $user_status , $user_email ){
+
+        $random_string = md5(microtime());
+
+        $newToken = $user_id . '+' . $user_status . '+'
+            . $user_email . '+' . now()->toDateString() . '+' . now()->toTimeString() . '+' . $random_string;
+
+        return Hash::make($newToken);
+
+    }
+
     public function login(Request $request)
     {
 
@@ -84,11 +97,18 @@ class ApiController extends Controller
         if ($msg != 'ok')
             return response()->json($msg, $status);
 
+
         $check_user = User::where('email', $request['email'])->where('password_text', $request['password'])->first();
+
+        $new_token = $this->create_login_token($check_user->id ,$check_user->status ,$check_user->email );
+
+        $con = new CreateOrUpdateController;
+        $con->create_new_token_fo_user_login($new_token , $check_user->id);
+
         if ($check_user == null)
             return response()->json("[003] Kullanıcı Bulunamadı ", 403);
         else
-            return response()->json($check_user, 200);
+            return response()->json([$check_user , $new_token], 200);
     }
 
 

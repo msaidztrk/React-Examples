@@ -20,6 +20,9 @@ import Stack from '@mui/material/Stack';
 
 
 import AuthContext from '../../context/AuthProvider';
+import useAuth from '../../hooks/useAuth';
+
+const LOGIN_URL = '/auth';
 
 
 function Copyright(props: any) {
@@ -43,7 +46,7 @@ export default function SignInSide() {
   window.history.replaceState(null, "Giriş Yap", "/login")
 
 
-  const { setAuth }: any = React.useContext(AuthContext);
+  const { setAuth }: any = useAuth();
 
   localStorage.removeItem('validation');
   localStorage.removeItem('array');
@@ -79,9 +82,18 @@ export default function SignInSide() {
       .then(response => {
         console.log('response : ', response.data);
 
-        if (response.status == 200) {
+        if (response.status == 200) { 
+
           localStorage.setItem('validation', 'true');
-          localStorage.setItem('array', JSON.stringify(response.data));
+          localStorage.setItem('array', JSON.stringify(response.data[0]));
+
+          const name = response?.data[0]?.name;
+          const status = response?.data[0]?.status;
+          const email = response?.data[0]?.email;
+          const token = response?.data[1];
+
+          setAuth({ name, status, email , token})
+
           setLoginError(false)
           navigate("/home");
         } else {
