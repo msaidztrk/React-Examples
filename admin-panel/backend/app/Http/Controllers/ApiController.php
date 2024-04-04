@@ -11,6 +11,17 @@ use UAParser\Parser;
 class ApiController extends Controller
 {
 
+    public function refresh_token(Request $request){
+
+
+        $ret_Val = [
+            $request->all() , 'sa' , request()->all()
+        ];
+
+        return response()->json($ret_Val, 200);
+
+    }
+
     public function delete_user(Request $request){
 
         $request->replace(array_change_key_case($request->all(), CASE_LOWER));
