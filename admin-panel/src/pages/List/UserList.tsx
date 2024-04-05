@@ -9,11 +9,12 @@ import Paper from '@mui/material/Paper';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import Button from '@mui/material/Button';
+import useAuth from '../../hooks/useAuth';
 
 
 
@@ -29,8 +30,10 @@ interface User {
 
 export default function BasicTable({ authObject }: any) {
 
-    const [allUsers, setAllUsers] = useState<User[]>([]);
-
+    const [allUsers, setAllUsers] = useState<User[]>([]); 
+    const axiosPrivate = useAxiosPrivate();
+    
+    const {auth} : any = useAuth();  
 
     function createForm(
         token: string,
@@ -40,15 +43,14 @@ export default function BasicTable({ authObject }: any) {
         return { token, auth };
     }
 
-
-    console.log("authObject : ", authObject);
-
+    authObject = auth;
+    console.log("authObject : ", authObject );
 
 
     useMemo(() => {
         let form_data = createForm("Test-deneme", authObject!.id);
 
-        axios.post('http://127.0.0.1:8000/api/get-all-users', form_data)
+        axiosPrivate.post('get-all-users', form_data)
             .then(response => {
                 console.log(response.data);
                 if (response.status === 200) {
@@ -89,7 +91,7 @@ export default function BasicTable({ authObject }: any) {
     async function make_post_axios(url: string, formData: object): Promise<[string, any]> {
         console.log("positng to : ", url);
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/' + url, formData);
+            const response = await axiosPrivate.post(url, formData);
             console.log('response:', response);
             return ['success', response];
         } catch (error: unknown) {

@@ -87,12 +87,14 @@ export default function SignInSide() {
           localStorage.setItem('validation', 'true');
           localStorage.setItem('array', JSON.stringify(response.data[0]));
 
+          const id = response?.data[0]?.id;
           const name = response?.data[0]?.name;
           const status = response?.data[0]?.status;
           const email = response?.data[0]?.email;
           const token = response?.data[1];
+          const accessToken = token;
 
-          setAuth({ name, status, email , token})
+          setAuth({ id , name, status, email , token , accessToken})
 
           setLoginError(false)
           navigate("/home");
