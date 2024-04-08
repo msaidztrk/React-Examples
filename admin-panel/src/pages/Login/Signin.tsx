@@ -16,7 +16,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import Stack from '@mui/material/Stack';
+import Stack from '@mui/material/Stack'; 
+
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 import AuthContext from '../../context/AuthProvider';
@@ -45,6 +47,7 @@ export default function SignInSide() {
 
   window.history.replaceState(null, "Giriş Yap", "/login")
 
+  const [user,setUser] = useLocalStorage('user', '')
 
   const { setAuth }: any = useAuth();
 
