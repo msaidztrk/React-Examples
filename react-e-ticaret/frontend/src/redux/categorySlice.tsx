@@ -7,7 +7,8 @@ const initialState = {
 
 export const getCategories : any = createAsyncThunk('category', async () => {
     const response = await fetch('https://fakestoreapi.com/products/categories');
-    const data = response.json();
+    const data = await  response.json();
+    console.log('response categories : ',data);
     return data;
 });
 
