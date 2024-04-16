@@ -21,7 +21,10 @@ const SliderComp = () => {
     <>
       <Slider {...settings}>
         {img_src_sliders.map((item, key) => (
-          <div className="!flex items-center bg-gray-100 px-6" key={key}>
+          <div
+            className="!flex items-center bg-gray-100 pl-6 h-[500px] place-items-end"
+            key={key}
+          >
             <div className="">
               <div className="text-5xl font-bold">
                 En Kaliteli Ayakkabilar Burada
@@ -31,12 +34,16 @@ const SliderComp = () => {
                 Incele
               </div>
             </div>
-            <img src={item} alt="" />
+
+            <img
+              src={item}
+              alt=""
+              className="h-full w-full  object-cover m-auto place-items-end"
+            />
           </div>
         ))}
-      </Slider>
-
-      <div className="pb-8"></div>
+      </Slider> 
+      <div className="pb-3"></div>
     </>
   );
 };
