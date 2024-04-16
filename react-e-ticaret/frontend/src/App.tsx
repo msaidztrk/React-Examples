@@ -10,6 +10,7 @@ import Home from './pages/Home'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css' 
+import Detail from './pages/Detail'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/products/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </PageContainer>
