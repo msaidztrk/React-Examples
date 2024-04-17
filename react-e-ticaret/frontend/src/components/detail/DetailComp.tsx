@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
 
 interface productDetail {
+  id: any;
   rating: {
     rate: number;
     count: number;
@@ -17,6 +20,9 @@ interface DetailCompProps {
 }
 
 const DetailComp = ({ productDetail }: DetailCompProps) => {
+
+  const dispatch = useDispatch();
+   
   const [quantity, setQuantity] = useState(0);
 
   const decrement = () => {
@@ -29,6 +35,10 @@ const DetailComp = ({ productDetail }: DetailCompProps) => {
   }; 
 
   const addBasket = () => {
+
+    console.log(productDetail?.title , quantity);
+
+    dispatch(addToCart({id : productDetail?.id , title : productDetail?.title , image : productDetail?.image , price : productDetail?.price ,  quantity : quantity}))
     
   }
 
@@ -60,6 +70,8 @@ const DetailComp = ({ productDetail }: DetailCompProps) => {
             className="w-13 text-center text-4xl font-bold"
             type="text"
             value={quantity}
+            disabled
+            readOnly
           />
           <div onClick={increment} className="text-4xl cursor-pointer">
             +
