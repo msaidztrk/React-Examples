@@ -38,7 +38,7 @@ const DetailComp = ({ productDetail }: DetailCompProps) => {
 
     console.log(productDetail?.title , quantity);
 
-    dispatch(addToCart({id : productDetail?.id , title : productDetail?.title , image : productDetail?.image , price : productDetail?.price ,  quantity : quantity}))
+    dispatch(addToCart(productDetail))
     
   }
 

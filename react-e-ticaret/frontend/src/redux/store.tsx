@@ -9,4 +9,6 @@ export const store = configureStore({
         products : productSlice , 
         carts : cartSlice
     },
-})
+}) 
+
+

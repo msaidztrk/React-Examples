@@ -7,7 +7,9 @@ import Loading from "../components/Loading";
 
 const Detail = () => {
   const { id } = useParams();
+
   const dispatch = useDispatch();
+
   const { productDetail, productDetailStatus } = useSelector(
     (state: any) => state.products
   ); // Assuming RootState is the type of your overall Redux store state
