@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -21,8 +23,34 @@ class AuthController extends Controller
         return $user;
     }
 
+    public function login(Request $request)  {
+       if(!Auth::attempt($request->only('email' , 'password'))){
+return response([
+    'message' => 'Invalid Credentials'
+] , Response::HTTP_UNAUTHORIZED);
+       }
+
+       $USER = Auth::user();
+
+       $token = $USER->createToken('token')->plainTextToken;
+       $cookie = cookie('jwt' , $token , 60*24);
+
+       return response([
+        'message' => 'Success'
+       ] )->withCookie($cookie);
+    }
+
     public function user(){
-        return 'TEST DENEME';
+        return Auth::user();
+    }
+
+
+    public function logout(Request $request){
+        $cookie = Cookie::forget('jwt');
+
+        return response([
+            'message' => 'Success'
+        ])->withCookie($cookie);
     }
 
 
