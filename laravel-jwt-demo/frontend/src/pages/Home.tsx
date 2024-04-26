@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  useEffect(() => {
+    (async () => {
+      await fetch("http://127.0.0.1:8000/api/user", {
+        method : "GET",
+        headers: { "Content-Type": "application/json" , "Accept" :"application/json" },
+        credentials: "include",
+      });
+    })();
+  });
 
-export default Home
+  return <div>Home</div>;
+};
+
+export default Home;

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -33,10 +34,11 @@ return response([
        $USER = Auth::user();
 
        $token = $USER->createToken('token')->plainTextToken;
-       $cookie = cookie('jwt' , $token , 60*24);
+       $cookie = cookie('jwt' , $token , 60*24 );
 
        return response([
-        'message' => 'Success'
+        'message' => 'Success' ,
+        'token' => $token
        ] )->withCookie($cookie);
     }
 
@@ -49,7 +51,8 @@ return response([
         $cookie = Cookie::forget('jwt');
 
         return response([
-            'message' => 'Success'
+            'message' => 'Success' ,
+
         ])->withCookie($cookie);
     }
 
