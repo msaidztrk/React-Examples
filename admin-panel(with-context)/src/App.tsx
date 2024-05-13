@@ -20,6 +20,7 @@ import RequireAuth from "./components/RequireAuth";
 
 import { useEffect, useMemo } from "react";
 
+
 // npm run dev for start
 
 
@@ -31,7 +32,12 @@ function App() {
   );
 }
 
-function AppRoutes() {
+function AppRoutes() { 
+
+
+  console.log(import.meta.env.VITE_APP_OTHER_VALUE); 
+
+
 
   const location = useLocation();
   const navigate = useNavigate();
