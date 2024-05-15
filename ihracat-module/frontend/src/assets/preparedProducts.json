@@ -1,0 +1,104 @@
+[
+{
+
+    "barkod": 8680108063361,
+    "marka": "CB",
+    "beden": "DOUBLE",
+    "ingredients" : ["DUVET", "FLAT", "YASTIK"],
+    "ingredients_data" : [ 
+        {
+            "isim" : "DUVET" ,
+            "en" : 200,
+            "boy" : 200,
+            "adet" : 2
+        },
+        {
+            "isim" : "YASTIK" ,
+            "en" : 300,
+            "boy" : 200,
+            "adet" : 2
+        },
+        {
+            "isim" : "FLAT" ,
+            "en" : 260,
+            "boy" : 240,
+            "adet" : 1
+        }
+    ] , 
+    "grup" : "PRINTED SATIN" ,
+    "desen" : "DALYA",
+    "renk" : "PUDRA", 
+    "adet" : 1 ,
+    "ölçü birim" : "AD",
+    "olcuPara" : "USD",
+    "fiyat" : 1456
+
+},
+{
+    "barkod": 8680108070376,
+    "marka": "CB",
+    "beden": "BOS",
+    "ingredients" : ["BORNOZ", "HAVLU"],
+    "ingredients_data" : [ 
+        {
+            "isim" : "BORNOZ" ,
+            "en" : 50,
+            "boy" : 50,
+            "adet" : 2
+        },
+        {
+            "isim" : "HAVLU" ,
+            "en" : 70,
+            "boy" : 60,
+            "adet" : 1
+        }
+    ] , 
+    "grup" : "SPIN" ,
+    "desen" : "SARINA",
+    "renk" : "LACIVERT", 
+    "adet" : 1 ,
+    "ölçü birim" : "AD",
+    "olcuPara" : "TL",
+    "fiyat" : 5000
+},
+{
+    "barkod": 8680108070376,
+    "marka": "FIXE LINE",
+    "beden": "SINGLE",
+    "ingredients" : ["PAD", "CARSAF" , "TOVEL" , "APRON"],
+    "ingredients_data" : [ 
+        {
+            "isim" : "PAD" ,
+            "en" : 50,
+            "boy" : 50,
+            "adet" : 2
+        },
+        {
+            "isim" : "TOVEL" ,
+            "en" : 70,
+            "boy" : 60,
+            "adet" : 1
+        },
+        {
+            "isim" : "APRON" ,
+            "en" : 70,
+            "boy" : 60,
+            "adet" : 1
+        },
+        {
+            "isim" : "CARSAF" ,
+            "en" : 500,
+            "boy" : 645,
+            "adet" : 2
+        }
+    ] , 
+    "grup" : "SATIN" ,
+    "desen" : "JAIDRA",
+    "renk" : "BEJ", 
+    "adet" : 5 ,
+    "ölçü birim" : "AD",
+    "olcuPara" : "TL",
+    "fiyat" : 5000
+}
+
+]

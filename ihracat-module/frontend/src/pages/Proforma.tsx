@@ -14,8 +14,11 @@ import Button from "@mui/material/Button";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../redux/counterSlice"
-;
+import { decrement, increment } from "../redux/counterSlice";
+import preparedProductsJson from "../assets/preparedProducts.json";
+import ProformaTableRow from "../components/ProformaTableRow";
+
+console.log(preparedProductsJson);
 
 const top100Films = [
   { label: "The Shawshank Redemption", year: 1994 },
@@ -122,6 +125,12 @@ const Proforma = () => {
           </TableRow>
         </TableHead>
         <TableBody>
+
+        {preparedProductsJson.map((data, index) => (
+      
+        <ProformaTableRow key={index} data={data}/>     
+
+          ))}
 
         </TableBody>
       </Table>
