@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect, createContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext<any | null>(null);
 
@@ -12,6 +13,9 @@ export const AuthProvider = ({ children }: any) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
+
+  const navigate = useNavigate(); 
+  
   const { setLocalItem, getLocalItem, removeLocalItem } = useLocalStorage();
 
   useEffect(() => {
@@ -24,7 +28,8 @@ export const AuthProvider = ({ children }: any) => {
     try {
       if (email == "sa" && password == "as") {
         setUser({ email, password }); // Set user data with type safety
-        setLocalItem("session", { email, password });
+        setLocalItem("session", { email, password }); 
+        navigate("/");
       } else {
         setUser(null);
         setLocalItem("session", null);

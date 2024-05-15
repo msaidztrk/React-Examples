@@ -9,6 +9,7 @@ import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 
 import Header from './components/Header.tsx'
+import Proforma from "./pages/Proforma.tsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,13 +19,18 @@ function App() {
       <BrowserRouter> 
       <AuthProvider>
         <Header/>
+        <div style={{marginTop:'20px' , padding : '2rem'}}>
         <Routes>
           <Route path="/login" element={<Login />} />
 
           <Route element={<PrivateRoutes />}>
             <Route path="/" element={<Dashboard />} />
+            <Route path="proforma" element={<Proforma />} />
+
           </Route>
+
         </Routes>
+        </div>
         </AuthProvider>
       </BrowserRouter>
     </>
