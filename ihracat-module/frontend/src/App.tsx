@@ -8,7 +8,7 @@ import { AuthProvider } from "./utils/AuthContext.tsx";
 import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 
-import Header from './components/Header.tsx'
+import Header from './components/Layout/Header.tsx'
 import Proforma from "./pages/Proforma.tsx";
 
 function App() {

@@ -1,7 +1,7 @@
 [
 {
 
-    "barkod": 8680108063361,
+    "barkod": "8680108063361",
     "marka": "CB",
     "beden": "DOUBLE",
     "ingredients" : ["DUVET", "FLAT", "YASTIK"],
@@ -29,13 +29,13 @@
     "desen" : "DALYA",
     "renk" : "PUDRA", 
     "adet" : 1 ,
-    "ölçü birim" : "AD",
+    "olcuBirim" : "AD",
     "olcuPara" : "USD",
     "fiyat" : 1456
 
 },
 {
-    "barkod": 8680108070376,
+    "barkod": "8680108070376",
     "marka": "CB",
     "beden": "BOS",
     "ingredients" : ["BORNOZ", "HAVLU"],
@@ -57,12 +57,12 @@
     "desen" : "SARINA",
     "renk" : "LACIVERT", 
     "adet" : 1 ,
-    "ölçü birim" : "AD",
+    "olcuBirim" : "AD",
     "olcuPara" : "TL",
     "fiyat" : 5000
 },
 {
-    "barkod": 8680108070376,
+    "barkod": "8680108070376",
     "marka": "FIXE LINE",
     "beden": "SINGLE",
     "ingredients" : ["PAD", "CARSAF" , "TOVEL" , "APRON"],
@@ -96,7 +96,7 @@
     "desen" : "JAIDRA",
     "renk" : "BEJ", 
     "adet" : 5 ,
-    "ölçü birim" : "AD",
+    "olcuBirim" : "AD",
     "olcuPara" : "TL",
     "fiyat" : 5000
 }
