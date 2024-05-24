@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Button from "@mui/material/Button"; 
+import Button from "@mui/material/Button";
 
 import ProformaTableRow from "../components/Proforma/ProformaTableRow";
 
@@ -19,8 +19,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { increment } from "../redux/productSlice";
 
 import preparedProductsJson from "../assets/preparedProducts.json";
-
-
 
 const top100Films = [
   { label: "The Shawshank Redemption", year: 1994 },

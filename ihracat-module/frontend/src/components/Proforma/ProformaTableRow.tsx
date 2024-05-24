@@ -6,17 +6,29 @@ import ProformaTableMainInfoTd from "./ProformaTableMainInfoTd";
 import ProformaTableFeaturesInfoTd from "./ProformaTableFeaturesInfoTd";
 import ProformaTableMoneyInfoTd from "./ProformaTableMoneyInfoTd";
 import ProformaTableTotalSumTd from "./ProformaTableTotalSumTd";
+import ProformaTableIngredientDetailsTd from "./ProformaTableIngredientDetailsTd";
 
 const ProformaTableRow = ({ data, index }: any) => {
-  return (
+
+
+  console.log("ProformaTableRow : ", index);
+
+
+  const handeDeleteRow = () => {
+    dispatch(changeValue({ type: type, value: eventVal, indexRow: index , arrayIndex : count }));
+  };
+
+  return ( 
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell component="th" scope="row">
-        1
+       {index + 1}
       </TableCell>
       <TableCell align="center">
         <ProformaTableMainInfoTd data={data}  index={index} />
       </TableCell>
-      <TableCell align="center">{data.marka}</TableCell>
+      <TableCell align="center">
+        <ProformaTableIngredientDetailsTd data={data}  index={index} />
+      </TableCell>
       <TableCell align="center">
         <ProformaTableFeaturesInfoTd data={data}  index={index} />
       </TableCell>
@@ -24,10 +36,10 @@ const ProformaTableRow = ({ data, index }: any) => {
         <ProformaTableMoneyInfoTd data={data}  index={index}/>
       </TableCell>
       <TableCell align="center">
-        <ProformaTableTotalSumTd />
+        <ProformaTableTotalSumTd  data={data} />
       </TableCell>
       <TableCell align="center">
-        <Button variant="outlined">Ürün Ekle</Button>
+        <Button variant="outlined" onClick={handeDeleteRow}>Ürün Ekle</Button>
       </TableCell>
     </TableRow>
   );

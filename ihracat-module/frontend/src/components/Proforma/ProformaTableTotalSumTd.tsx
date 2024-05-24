@@ -1,10 +1,14 @@
 import TextField from "@mui/material/TextField";
 import React from "react";
+import { useSelector } from "react-redux";
 
-const ProformaTableTotalSumTd = () => {
+
+
+const ProformaTableTotalSumTd = ({data } : any) => { 
+
   return (
     <>
-      <TextField id="outlined-error" label="TUTAR" sx={{ width: 150 }} />
+     <span>{data.totalSum}</span>
     </>
   );
 };
